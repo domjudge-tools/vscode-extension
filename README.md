@@ -1,65 +1,34 @@
-# submit README
+# VSCode DOMjudge Submitter
 
-This is the README for your extension "submit". After writing up a brief description, we recommend including the following sections.
+A lightweight VSCode extension to submit programming contest solutions directly to **DOMjudge** from the editor.
 
-## Features
+With this extension, you can:
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+- Save your team credentials securely.
+- Choose problems to submit.
+- Select the active file in your editor or pick a file.
+- Submit solutions directly to your DOMjudge contest.
+- Get submission feedback in VSCode.
 
 ---
 
-## Working with Markdown
+## Features
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+- **Set Credentials**: Store your DOMjudge username and password securely using VSCode Secret Storage.
+- **Choose Problem**: Select a problem from a list (can be updated to fetch from your DOMjudge API).
+- **Choose File**: Select a local file or use the active editor file.
+- **Submit Solution**: Upload your solution directly to the contest.
+- **Status Bar Button**: Quick submission from the VSCode status bar.
 
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
+---
 
-## For more information
+## Installation
 
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+### Run locally
 
-**Enjoy!**
+1. Clone or download this repository:
+
+```bash
+git clone <your-repo-url>
+cd vscode-domjudge-extension
+```
