@@ -1,34 +1,33 @@
-# VSCode DOMjudge Submitter
+# 📦 DOMJudge Submitter – VSCode Extension
 
-A lightweight VSCode extension to submit programming contest solutions directly to **DOMjudge** from the editor.
+A Visual Studio Code extension that allows you to **submit solutions to DOMJudge directly from VSCode**, using the DOMJudge REST API.
 
-With this extension, you can:
+This extension supports:
 
-- Save your team credentials securely.
-- Choose problems to submit.
-- Select the active file in your editor or pick a file.
-- Submit solutions directly to your DOMjudge contest.
-- Get submission feedback in VSCode.
+- Submit the current file to a DOMJudge contest  
+- Quick submission notifications  
+- Commands for editing credentials  
 
 ---
 
-## Features
+## 🚀 Features
 
-- **Set Credentials**: Store your DOMjudge username and password securely using VSCode Secret Storage.
-- **Choose Problem**: Select a problem from a list (can be updated to fetch from your DOMjudge API).
-- **Choose File**: Select a local file or use the active editor file.
-- **Submit Solution**: Upload your solution directly to the contest.
-- **Status Bar Button**: Quick submission from the VSCode status bar.
+- Fast DOMJudge submission directly inside VSCode  
+- Auto-detect:  
+  - **Language ID**  
+  - **File path & filename**  
+- Problem list fetched live via API  
+- Safe credential storage  
+- Error handling with copy-to-clipboard
+- Uses the official DOMJudge REST API (v4)
 
 ---
 
-## Installation
+## ⚙️ Configuration
 
-### Run locally
+All settings can be edited **after installing the extension**.
 
-1. Clone or download this repository:
+Open:
+File → Preferences → Settings → Extensions → DOMJudge
 
-```bash
-git clone <your-repo-url>
-cd vscode-domjudge-extension
-```
+

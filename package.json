@@ -1,10 +1,11 @@
 {
-  "name": "submit",
-  "displayName": "submit",
+  "name": "domjudge-submitter",
+  "displayName": "DOMJudge Submitter",
+  "publisher": "saeed0920",
   "description": "",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "engines": {
-    "vscode": "^1.106.0"
+    "vscode": "^1.105.0"
   },
   "categories": [
     "Other"
@@ -13,51 +14,42 @@
   "main": "./extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "myExtension.runAction",
-        "title": "Run My Action"
+        {
+        "command": "domjudge.runAction",
+        "title": "DOMjudge: Submit Solution",
+        "icon": "$(cloud-upload)"
       },
       {
-        "command": "myExtension.saveCredentials",
-        "title": "Save DOMjudge Credentials",
-        "category": "DOMjudge"
+        "command": "domjudge.clearCredentials",
+        "title": "DOMjudge: Remove Saved Credentials",
+        "icon": "$(trash)"
       }
     ],
     "menus": {
       "editor/title": [
         {
-          "command": "myExtension.runAction",
+          "command": "domjudge.runAction",
           "group": "navigation@1"
         }
       ]
     },
-    "icons": {
-      "myExtension.runAction": {
-        "default": "./media/icon.svg",
-        "dark": "./media/icon.svg"
-      }
-    }
-  },
-  "configuration": {
-    "title": "DOMjudge",
+"configuration": {
+    "type": "object",
+    "title": "DOMjudge Extension Settings",
     "properties": {
       "domjudge.url": {
         "type": "string",
-        "default": "http://127.0.0.1:12345",
-        "description": "Base URL of the DOMjudge instance"
+        "default": "http://domjudge",
+        "description": "The DOMjudge server URL"
       },
       "domjudge.contestId": {
         "type": "string",
         "default": "1",
-        "description": "Contest ID"
-      },
-      "domjudge.username": {
-        "type": "string",
-        "default": "team*",
-        "description": "Default team username (password prompted separately for security)"
+        "description": "The contest ID to submit solutions to"
       }
     }
-  },
+  }
+  }, 
   "scripts": {
     "lint": "eslint .",
     "pretest": "pnpm run lint",
@@ -68,7 +60,7 @@
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
-    "@types/vscode": "^1.106.0",
+    "@types/vscode": "^1.105.0",
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
     "eslint": "^9.39.1"
