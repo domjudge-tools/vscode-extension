@@ -25,9 +25,8 @@ This extension supports:
 
 ## ⚙️ Configuration
 
-All settings can be edited **after installing the extension**.
-
-Open:
-File → Preferences → Settings → Extensions → DOMJudge
+Should based on the env:
+`DOMJUDGE_URL`
+`DOMJUDGE_CONTEST_ID`
 
 

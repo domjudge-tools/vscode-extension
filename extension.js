@@ -1,4 +1,3 @@
-
 const vscode = require("vscode");
 const axios = require("axios");
 const FormData = require("form-data");
@@ -6,22 +5,32 @@ const fs = require("fs");
 const path = require("path");
 const time = 3500;
 
-const config = vscode.workspace.getConfiguration("domjudge");
+// const config = vscode.workspace.getConfiguration("domjudge");
 
 // ============ CONFIG ============
-    
-const DOMJUDGE_URL = config.get("url");
-const CONTEST_ID = config.get("contestId");
+function getConfig() {
+  // read OS environment variables
+  const envUrl = process.env.DOMJUDGE_URL;
+  const envContestId = process.env.DOMJUDGE_CONTEST_ID;
+
+  const vscodeConfig = vscode.workspace.getConfiguration("domjudge");
+
+  return {
+    // priority: Linux env > VSCode settings
+    url: envUrl || vscodeConfig.get("url"),
+    contestId: envContestId || vscodeConfig.get("contestId"),
+  };
+}
+
+const DOMJUDGE_URL = getConfig().url;
+const CONTEST_ID = getConfig().contestId;
 const API_URL = `${DOMJUDGE_URL}/api/v4/contests/${CONTEST_ID}`;
 
 //const DOMJUDGE_URL = "http://127.0.0.1:12345";
 //const CONTEST_ID = "1";
-//
-// =================================
-//const API_URL = `${DOMJUDGE_URL}/api/v4/contests/${CONTEST_ID}`;
 
 // ======================================================
-//  SAVE USERNAME + PASSWORD (Fix: context now passed in)
+//  SAVE USERNAME + PASSWORD
 // ======================================================
 async function saveCredentials(context) {
   const username = await vscode.window.showInputBox({
@@ -33,7 +42,7 @@ async function saveCredentials(context) {
   const password = await vscode.window.showInputBox({
     title: "Enter DOMjudge Password",
     prompt: "Your team password",
-    ignoreFocusOut: true
+    ignoreFocusOut: true,
     //password: true,
   });
 
@@ -45,7 +54,7 @@ async function saveCredentials(context) {
   await context.secrets.store("domjudge-username", username);
   await context.secrets.store("domjudge-password", password);
 
-  vscode.window.showInformationMessage("Credentials saved securely!",time);
+  vscode.window.showInformationMessage("Credentials saved securely!", time);
 }
 
 // MAP FOR LANGUAGE
@@ -53,13 +62,13 @@ function detectLanguageId(filePath) {
   //const ext = filePath.split('.').pop().toLowerCase();
   const ext = filePath;
   const map = {
-    "cpp": "cpp",
-    "cc": "cpp",
-    "cxx": "cpp",
-    "c": "c",
-    "python": "python3",
-    "py": "python3",
-    "java": "java"
+    cpp: "cpp",
+    cc: "cpp",
+    cxx: "cpp",
+    c: "c",
+    python: "python3",
+    py: "python3",
+    java: "java",
   };
 
   return map[ext] || null;
@@ -71,7 +80,7 @@ function detectLanguageId(filePath) {
 async function removeCredentials(context) {
   await context.secrets.delete("domjudge-username");
   await context.secrets.delete("domjudge-password");
-  vscode.window.showInformationMessage("Credentials removed." , time);
+  vscode.window.showInformationMessage("Credentials removed.", time);
 }
 
 // ======================================================
@@ -110,13 +119,12 @@ async function submitSolution(
     return;
   }
 
-  vscode.window.showInformationMessage("Submitting..." , time);
+  vscode.window.showInformationMessage("Submitting...", time);
 
   const form = new FormData();
 
   form.append("problem", problemId);
   form.append("language", langId);
-
 
   const filename = path.basename(filePath);
   form.append("code", fs.createReadStream(filePath), filename);
@@ -127,9 +135,8 @@ async function submitSolution(
       headers: form.getHeaders(),
     });
 
-    vscode.window.showInformationMessage("Submission successful!" , time);
+    vscode.window.showInformationMessage("Submission successful!", time);
     console.log(res.data);
-
   } catch (err) {
     const status = err?.response?.status || "Unknown";
 
@@ -145,7 +152,9 @@ async function submitSolution(
         }
 
         if (choice === "Show Details") {
-          const out = vscode.window.createOutputChannel("DOMjudge Submission Error");
+          const out = vscode.window.createOutputChannel(
+            "DOMjudge Submission Error"
+          );
           out.appendLine(JSON.stringify(err, null, 2));
           out.show();
         }
@@ -182,11 +191,10 @@ function activate(context) {
       //const langId = editor.document.languageId;
 
       const langId = detectLanguageId(editor.document.languageId);
-       if (!langId) {
-         vscode.window.showErrorMessage("Unsupported file type for submission.");
-         return;
-       }
-
+      if (!langId) {
+        vscode.window.showErrorMessage("Unsupported file type for submission.");
+        return;
+      }
 
       const problems = await getProblems();
       if (!problems.length) return;
@@ -236,4 +244,3 @@ function activate(context) {
 function deactivate() {}
 
 module.exports = { activate, deactivate };
-

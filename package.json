@@ -3,7 +3,7 @@
   "displayName": "DOMJudge Submitter",
   "publisher": "saeed0920",
   "description": "",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "engines": {
     "vscode": "^1.105.0"
   },
@@ -39,7 +39,7 @@
     "properties": {
       "domjudge.url": {
         "type": "string",
-        "default": "http://domjudge",
+        "default": "http://domserver",
         "description": "The DOMjudge server URL"
       },
       "domjudge.contestId": {
