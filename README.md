@@ -30,3 +30,6 @@ Should based on the env:
 `DOMJUDGE_CONTEST_ID`
 
 
+## TODO
+- [] update the raedme file(add toturial for that ,video of gif)
+- [] also add backup way for change the contestID and contestURL
