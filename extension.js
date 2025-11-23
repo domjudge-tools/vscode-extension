@@ -16,9 +16,9 @@ function getConfig() {
   const vscodeConfig = vscode.workspace.getConfiguration("domjudge");
 
   return {
-    // priority: Linux env > VSCode settings
-    url: envUrl || vscodeConfig.get("url"),
-    contestId: envContestId || vscodeConfig.get("contestId"),
+    // priority:  VSCode settings > Linux env
+    url: vscodeConfig.get("url") || envUrl ,
+    contestId: vscodeConfig.get("contestId") || envContestId,
   };
 }
 
@@ -87,6 +87,8 @@ async function removeCredentials(context) {
 // FETCH PROBLEMS LIST FOR QUICK PICK
 // ======================================================
 async function getProblems() {
+
+    vscode.window.showInformationMessage(`this is url : ${API_URL}`)
   try {
     const response = await axios.get(`${API_URL}/problems?strict=false`);
     return response.data.map((p) => ({
