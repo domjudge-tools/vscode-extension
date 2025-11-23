@@ -4,7 +4,7 @@ This extension allows contestants to **submit solutions directly to DOMjudge** w
 
 ### Demo
 
-<video src="./media/output.mp4" autoplay loop muted playsinline></video>
+<video src="media/output.mp4" autoplay loop muted playsinline></video>
 
 ## Features
 
